@@ -43,12 +43,25 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
         if n <= 2: return n
-        f1, f2, res = 1, 2, 3
-        for _ in range(3, n+1) :
-            res = f1 + f2
-            f1 = f2
-            f2 = res
-        return res
+        f1, f2 = 1, 2
+        for _ in range(2, n) :
+            temp = f2
+            f2 = f1 + f2
+            f1 = temp            
+        return f2
+
+    # def climbStairs(self, n: int) -> int:
+    #     d = {1: 1, 2: 2}
+    #     def helper(n: int) -> int:
+    #         if n not in d:
+    #             d[n] = helper(n-1) + helper(n-2)
+    #         return d[n]
+    #     return helper(n)
+
+    # 递归方法 超时
+    # def climbStairs(self, n: int) -> int:
+    #     if n < 3: return n
+    #     return self.climbStairs(n-1) + self.climbStairs(n-2)
 
 # @lc code=end
 

@@ -32,14 +32,23 @@
 
 # @lc code=start
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 
 class Solution:
+    # 右子树优先的先序遍历，然后逆序返回结果
     def postorderTraversal(self, root: TreeNode) -> List[int]:
+        stack, res = [root], []
+        while stack:
+            c = stack.pop()
+            if c:
+                res.append(c.val)
+                stack.append(c.left)
+                stack.append(c.right)
+        return res[::-1]
         
 # @lc code=end
 

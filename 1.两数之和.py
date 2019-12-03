@@ -29,7 +29,8 @@
 
 # @lc code=start
 class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
+    # 使用hashSet的最优解法
+    def twoSum(self, nums: [int], target: int) -> [int]:
         dict = {}
         for i, n in enumerate(nums):
             if target - n in dict:
