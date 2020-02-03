@@ -44,12 +44,19 @@ class Solution:
     # - 返回值应该是当前元素的下一元素，因为经过交换之后，当前元素的下一元素就是已经交换过的元素的头部
     # - 终止条件则是head或head.next 为none，因为当head或head.next为none时，对于当前head来说，剩下的元素都是翻转好的了。
 
+    # def swapPairs(self, head: ListNode) -> ListNode:
+    #         if head == None or head.next == None: return head
+    #         next = head.next
+    #         head.next = self.swapPairs(next.next)
+    #         next.next = head
+    #         return next
+
     def swapPairs(self, head: ListNode) -> ListNode:
-            if head == None or head.next == None: return head
-            next = head.next
-            head.next = self.swapPairs(next.next)
-            next.next = head
-            return next
+        if not head or not head.next: return head
+        next = head.next
+        head.next = self.swapPairs(next.next)
+        next.next = head
+        return next
         
 # @lc code=end
 

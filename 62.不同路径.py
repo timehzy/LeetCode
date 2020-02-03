@@ -45,12 +45,17 @@
 
 # @lc code=start
 class Solution:
+    # def uniquePaths(self, m: int, n: int) -> int:
+    #     cur = [1]*m
+    #     for _ in range(1, n):
+    #         for j in range(1, m):
+    #             cur[j] = cur[j-1] + cur[j]
+    #     return cur[-1]
     def uniquePaths(self, m: int, n: int) -> int:
-        cur = [1]*m
-        for _ in range(1, n):
-            for j in range(1, m):
-                cur[j] = cur[j-1] + cur[j]
-        return cur[-1]
-
+        dif = [1] * n
+        for _ in range(1, m):
+            for j in range(1, n):
+                dif[j] += dif[j - 1]
+        return dif[-1]
 # @lc code=end
 

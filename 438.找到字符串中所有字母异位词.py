@@ -57,7 +57,23 @@
 
 # @lc code=start
 class Solution:
-    def findAnagrams(self, s: str, p: str) -> List[int]:
-        
+
+    def countArr(self, s: str) -> [int]:
+        arr = [0]*26
+        for c in s:
+            arr[ord(c) - ord('a')] += 1
+        return arr
+
+    def findAnagrams(self, s: str, p: str) -> [int]:
+        sa, sp = self.countArr(s[:len(p)]), self.countArr(p)
+        res = []
+        if sa == sp: res.append(0)
+        for i in range(1, len(s)-len(p)+1):
+            left = ord(s[i-1])-ord('a')
+            right = ord(s[i+len(p)-1])-ord('a')
+            sa[left] -= 1; sa[right] += 1
+            if sa == sp: res.append(i)
+        return res
+
 # @lc code=end
 

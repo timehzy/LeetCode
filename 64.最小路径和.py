@@ -33,18 +33,43 @@
 
 # @lc code=start
 class Solution:
+    # def minPathSum(self, grid: [[int]]) -> int:
+    #     dp = [0]*len(grid[0])
+    #     for i in range(len(grid)):
+    #         for j in range(len(grid[i])):
+    #             if j == 0:#对于第一列，最小路径和是该元素上面元素的累加和
+    #                 dp[j] = grid[i][j] + dp[j] 
+    #             elif i == 0:#对于第一行，最小路径和是该元素左侧元素的累加和
+    #                 dp[j] = grid[i][j] + dp[j - 1]
+    #             else:#对于剩下的元素，最小路径和是该元素左侧和上侧较小值加上当前元素值
+    #                 dp[j] = grid[i][j] + min(dp[j], dp[j - 1])
+    #     return dp[-1]
+    # O(n) place
+    # def minPathSum(self, grid: [[int]]) -> int:
+    #     dp = [0] * len(grid[0])
+    #     for i in range(len(grid)):
+    #         for j in range(len(dp)):
+    #             if j == 0:
+    #                 dp[j] = grid[i][j] + dp[j]
+    #             elif i == 0:
+    #                 dp[j] = grid[i][j] + dp[j - 1]
+    #             else:
+    #                 dp[j] = grid[i][j] + min(dp[j], dp[j - 1])
+    #     return dp[-1]
+    # in place
     def minPathSum(self, grid: [[int]]) -> int:
-        dp = [0]*len(grid[0])
         for i in range(len(grid)):
-            for j in range(len(grid[i])):
-                if i == 0:
-                    dp[j] = grid[i][j] + (dp[j - 1] if j > 0 else 0)
+            for j in range(len(grid[0])):
+                if i > 0 and j > 0:
+                    grid[i][j] += min(grid[i-1][j], grid[i][j-1])
                 elif j == 0:
-                    dp[j] = grid[i][j] + dp[j]
+                    grid[i][j] += grid[i - 1][j] if i > 0 else 0
                 else:
-                    dp[j] = min(dp[j], dp[j - 1]) + grid[i][j]
-        return dp[-1]
-        
+                    grid[i][j] += grid[i][j - 1] if j > 0 else 0
+        return grid[-1][-1]
+                
+
+    
 # Solution().minPathSum([
 #   [1,3,1],
 #   [1,5,1],

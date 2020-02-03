@@ -45,22 +45,55 @@
 
 # @lc code=start
 class Solution:
+    # def uniquePathsWithObstacles(self, obstacleGrid: [[int]]) -> int:
+    #     if not obstacleGrid: return 0
+    #     r, c = len(obstacleGrid), len(obstacleGrid[0])
+    #     dp = [[0 for _ in range(c)] for _ in range(r)]
+    #     dp[0][0] = 1 - obstacleGrid[0][0] # 第一个位置的路径
+    #     # 第一列的路径是当上面的块无障碍（0）且当前的块无障碍（0），否则就不通（1）。用乘法巧妙的计算，第一行也是同样的情况
+    #     for i in range(1, r):
+    #         dp[i][0] = dp[i-1][0] * (1 - obstacleGrid[i][0])
+    #     for j in range(1, c):
+    #         dp[0][j] = dp[0][j-1] * (1 - obstacleGrid[0][j])
+    #     # 计算路径和，左侧和上侧的路径相加，但是如果当前路径是障碍则归0，同样是乘法来巧妙的解决
+    #     for i in range(1, r):
+    #         for j in range(1, c):
+    #                 dp[i][j] = (dp[i-1][j] + dp[i][j-1]) * (1 - obstacleGrid[i][j])
+    #     return dp[-1][-1]
+
+    # def uniquePathsWithObstacles(self, obstacleGrid: [[int]]) -> int:
+    #     if not obstacleGrid: return 0
+    #     r, c = len(obstacleGrid), len(obstacleGrid[0])
+    #     dp = [[0 for _ in range(c)] for _ in range(r)]
+    #     dp[0][0] = 1 - obstacleGrid[0][0] # 第一个位置的路径
+    #     # 第一列的路径是当上面的块无障碍（0）且当前的块无障碍（0），否则就不通（1）。用乘法巧妙的计算，第一行也是同样的情况
+    #     # for i in range(1, r):
+    #     #     dp[i][0] = dp[i-1][0] * (1 - obstacleGrid[i][0])
+    #     # for j in range(1, c):
+    #     #     dp[0][j] = dp[0][j-1] * (1 - obstacleGrid[0][j])
+    #     # 计算路径和，左侧和上侧的路径相加，但是如果当前路径是障碍则归0，同样是乘法来巧妙的解决
+    #     for i in range(0, r):
+    #         for j in range(0, c):
+    #             if i == 0 and j == 0: continue
+    #             elif j == 0:
+    #                 dp[i][j] = dp[i-1][j] * (1 - obstacleGrid[i][j])
+    #             elif i == 0:
+    #                 dp[i][j] = dp[i][j-1] * (1 - obstacleGrid[i][j])
+    #             else:
+    #                 dp[i][j] = (dp[i-1][j] + dp[i][j-1]) * (1 - obstacleGrid[i][j])
+    #     return dp[-1][-1]
+
     def uniquePathsWithObstacles(self, obstacleGrid: [[int]]) -> int:
-        if obstacleGrid[0][0] == 1: return 0
-        obstacleGrid[0][0] = 1
-        for i in range(1, len(obstacleGrid)):
-            obstacleGrid[i][0] = 1 if obstacleGrid[i-1][0] == 1 and obstacleGrid[i][0] == 0 else 0
-        for j in range(1, len(obstacleGrid[0])):
-            obstacleGrid[0][j] = 1 if obstacleGrid[0][j-1] == 1 and obstacleGrid[0][j] == 0 else 0
+        if not obstacleGrid: return 0
+        r, c = len(obstacleGrid), len(obstacleGrid[0])
+        dp = [[0 for _ in range(c)] for _ in range(r)]
+        dp[0][0] = 1 - obstacleGrid[0][0] # 第一个位置的路径
+        for i in range(0, r):
+            for j in range(0, c):
+                if i == 0 and j == 0: continue
+                top, left = 0 if i == 0 else dp[i-1][j], 0 if j == 0 else dp[i][j-1]
+                dp[i][j] = (top + left) * (1 - obstacleGrid[i][j])
+        return dp[-1][-1]
 
-        for i in range(1, len(obstacleGrid)):
-            for j in range(1, len(obstacleGrid[0])):
-                if obstacleGrid[i][j] == 1:
-                    obstacleGrid[i][j] = 0
-                else:
-                    obstacleGrid[i][j] = obstacleGrid[i-1][j] + obstacleGrid[i][j-1]
-        return obstacleGrid[-1][-1]
-
-print(Solution().uniquePathsWithObstacles([[0,0,0],[0,1,0],[0,0,0]]))
 # @lc code=end
 

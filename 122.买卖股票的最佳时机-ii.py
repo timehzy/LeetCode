@@ -46,8 +46,17 @@
 
 # @lc code=start
 class Solution:
+    # 取巧
+    # def maxProfit(self, prices: List[int]) -> int:
+    #     return sum(max(prices[i + 1] - prices[i], 0) for i in range(len(prices)-1)) 
+    # dp
     def maxProfit(self, prices: List[int]) -> int:
-        return sum(max(prices[i + 1] - prices[i], 0) for i in range(len(prices)-1)) 
+        dp_i_0, dp_i_1 = 0, float('-inf')
+        for p in prices:
+            temp = dp_i_0
+            dp_i_0 = max(dp_i_0, dp_i_1 + p)
+            dp_i_1 = max(dp_i_1, temp - p)
+        return dp_i_0
             
 # @lc code=end
 

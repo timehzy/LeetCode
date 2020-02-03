@@ -49,16 +49,42 @@
 # 
 #
 
-from collections import deque
 # @lc code=start
+from collections import deque
 class Solution:
-    def maxSlidingWindow(self, nums: [int], k: int) -> [int]:
-        queue = deque([nums[:k]])
-        result = [max(queue)]
-        for i in range(k, len(nums)):
+    # def maxSlidingWindow(self, nums: [int], k: int) -> [int]:
+    #     if len(nums) * k == 0: return []
+    #     if k == 1: return nums
+    #     deq, res = deque(), [nums[0]]
+    #     def clea_deq_forindex(i: int):
+    #         if deq and deq[0] == i - k:
+    #             deq.popleft()
+    #         while deq and nums[i] > nums[deq[-1]]:
+    #             deq.pop()
             
-        return [2]
+    #     for i in range(1, k):
+    #         clea_deq_forindex(i)
+    #         deq.append(i)
+    #         if nums[i] > res[0]: res[0] = nums[i]
 
-Solution().maxSlidingWindow([1, 2, 3, 5, 8], 3)
+    #     for i in range(k, len(nums)):
+    #         clea_deq_forindex(i)
+    #         deq.append(i)
+    #         res.append(nums[deq[0]])
+        
+    #     return res
+
+    def maxSlidingWindow(self, nums: [int], k: int) -> [int]:
+        deq, res = deque(), []
+
+        def clean_deq_index(i: int):
+            if deq and deq[0] < nums[i]:
+                deq.popleft()
+            while deq and 
+
+        for i in range(k):
+
+
+print(Solution().maxSlidingWindow([1,3,1,2,0,5], 3))
 # @lc code=end
 

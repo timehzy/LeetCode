@@ -38,17 +38,16 @@
 # @lc code=start
 class Solution:
     # def rob(self, nums: [int]) -> int:
-    #     dp, ans = [0] * len(nums), 0
-    #     for i in range(len(nums)):
-    #         dp[i] = nums[i]
-    #         if i == 2: dp[i] += nums[i - 2]
-    #         elif i > 2: dp[i] += max(dp[i - 2], dp[i - 3])
-    #         ans = max(ans, dp[i])
-    #     return ans
+    #     cur = pre = 0
+    #     for n in nums: 
+    #         cur, pre = max(n + pre, cur), cur
+    #     return cur
 
     def rob(self, nums: [int]) -> int:
         cur = pre = 0
-        for n in nums: cur, pre = max(n + pre, cur), cur
+        for n in nums:
+            cur, pre = max(pre + n, cur), cur
         return cur
 # @lc code=end
+
 

@@ -41,14 +41,14 @@
 
 # @lc code=start
 class Solution:
-    def climbStairs(self, n: int) -> int:
-        if n <= 2: return n
-        f1, f2 = 1, 2
-        for _ in range(2, n) :
-            temp = f2
-            f2 = f1 + f2
-            f1 = temp            
-        return f2
+    # def climbStairs(self, n: int) -> int:
+    #     if n <= 2: return n
+    #     f1, f2 = 1, 2
+    #     for _ in range(2, n) :
+    #         temp = f2
+    #         f2 = f1 + f2
+    #         f1 = temp            
+    #     return f2
 
     # def climbStairs(self, n: int) -> int:
     #     d = {1: 1, 2: 2}
@@ -62,6 +62,10 @@ class Solution:
     # def climbStairs(self, n: int) -> int:
     #     if n < 3: return n
     #     return self.climbStairs(n-1) + self.climbStairs(n-2)
+    def climbStairs(self, n: int) -> int:
+        x = y = 1
+        for _ in range(1, n): x, y = y, x + y
+        return y
 
 # @lc code=end
 

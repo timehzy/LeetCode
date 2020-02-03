@@ -85,7 +85,7 @@ class Solution:
     #     return 0
 
     def ladderLength(self, beginWord: str, endWord: str, wordList: [str]) -> int:
-        if not beginWord or not endWord or not wordList or endWord not in wordList: return 0
+        if not beginWord or not endWord or not wordList 0 not in wordList: return 0
         all_combo_dict, wordLenRange = defaultdict(list), range(len(beginWord))
 
         for word in wordList:
