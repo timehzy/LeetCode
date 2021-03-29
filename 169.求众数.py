@@ -50,6 +50,19 @@ class Solution:
     # def majorityElement(self, nums: [int]) -> int:
     #     return sorted(nums)[len(nums)//2]
 
+    # 存储计数
+    # def majorityElement(self, nums: List[int]) -> int:
+    #     count = {}
+    #     half = len(nums) / 2
+    #     for num in nums:
+    #         if num in count.keys():
+    #             count[num] += 1
+    #         else:
+    #             count[num] = 1
+    #         if count[num] > half:
+    #                 return num
+    #     return 0
+
     # 随机，由于众数超过元素的一半，所以随机很有可能访问到，于是每次随机访问一个元素，计算该元素出现的次数，超过数组的一半即为答案
     def majorityElement(self, nums: [int]) -> int:
         target = len(nums)/2

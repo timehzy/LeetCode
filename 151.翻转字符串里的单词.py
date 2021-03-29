@@ -57,10 +57,38 @@
 
 # @lc code=start
 class Solution:
+    # 极简三行
     def reverseWords(self, s: str) -> str:
         s = s.strip()
         sarr = s.split()
         return " ".join(sarr[::-1])
+
+    # def reverseWords(self, s: str) -> str:
+    #     # 过滤两头的空格，并将每个单词作为元素存储在数组中
+    #     start = 0
+    #     while start < len(s) and s[start] == " ": start += 1
+    #     s = s[start:]
+
+    #     end = len(s) - 1 
+    #     while end >= 0 and s[end] == " ": end -= 1
+    #     s, sarr, start = s[:end+1], [], 0
+
+    #     while start < len(s):
+    #         end = start
+    #         while end < len(s) and s[end] != " ": end += 1
+    #         sarr.append(s[start:end])
+    #         start = end+1
+    #         while start < len(s) and s[start] == " ": start += 1
+
+    #     result = ""
+    #     for word in reversed(sarr):
+    #         result += word + " "
+    #     return result[:-1]
+
+
+
+print(Solution().reverseWords(" "))
+
 
 # @lc code=end
 

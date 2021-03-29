@@ -1,4 +1,4 @@
-#
+ #
 # @lc app=leetcode.cn id=125 lang=python3
 #
 # [125] 验证回文串
