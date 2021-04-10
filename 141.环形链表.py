@@ -63,28 +63,24 @@ class ListNode:
 
 class Solution:
     # 快慢指针法
-    # def hasCycle(self, head: ListNode) -> bool:
-    #     if head == None or head.next == None: return False
-    #     fast = head.next
-    #     slow = head
-    #     while fast != slow:
-    #         if fast == None or fast.next == None:
-    #             return False
-    #         fast = fast.next.next
-    #         slow = slow.next
-    #     return True
-
-    # 哈希表法
     def hasCycle(self, head: ListNode) -> bool:
         if not head or not head.next: return False
-        nodeSet = set([head])
-        while head.next != None:
-            head = head.next
-            if head in nodeSet:
-                return True
-            else:
-                nodeSet.add(head)
-        return False
+        slow, fast = head, head.next
+        while slow != fast:
+            if not fast or not fast.next: return False
+            slow = slow.next
+            fast = fast.next.next
+        return True
+
+    # 哈希表法
+    # def hasCycle(self, head: ListNode) -> bool:
+    #     if not head or not head.next: return False
+    #     nodeSet = set([head])
+    #     while head.next:
+    #         head = head.next
+    #         if head in nodeSet: return True
+    #         nodeSet.add(head)
+    #     return False
 
 # @lc code=end
 
