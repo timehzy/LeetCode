@@ -33,19 +33,20 @@
 
 # @lc code=start
 class Solution:
+    # 思路：遍历字符，如果是“(”肯定不能成为最后一个有效括号，所以只看从第二个字符开始是")"的。如果前一个字符是“(”，那么可以是有效括号，这是这个字符为结尾的最长有效括号就是其上上一个字符的最长有效长度+2。另一种情况就是虽然前一个是“)”，但如果这个")"为结尾但最长有效括号开头的那个字符的前一个字符是“(”，这样的情况也是有效的。这时最长有效长度就是前一个字符为结尾的最长有效长度+2，再加前一段最长的有效长度。
     def longestValidParentheses(self, s: str) -> int:
-        dp, ans = [0]*len(s), 0
-        for i in range(1, len(s)):
-            if s[i] == "(": continue
-            if s[i - 1] == "(":
-                dp[i] = 2 + (dp[i - 2] if i > 1 else 0)
-            else:
-                # 前一个）的有效串的（的位置，若该位置的前一个字符串是"("，该判断才有效，因为这个（正是拼配了当前的）
-                lli = i - dp[i - 1]
-                if lli > 0 and s[lli-1] == "(": 
-                    dp[i] = dp[i - 1] + 2
-                    if lli >= 2: dp[i] += dp[lli - 2]
-            ans = max(ans, dp[i])
-        return ans
+        dp, res = [0] * len(s), 0
+        for i in range(len(s)):
+            if i > 0 and s[i] == ")":
+                if s[i - 1] == "(":
+                    dp[i] = dp[i - 2] + 2
+                elif (i - dp[i - 1] - 1 >= 0) and (s[i - dp[i - 1] - 1] == "("):
+                    dp[i] = dp[i - 1] + 2 + dp[i - dp[i - 1] - 2]
+                if res < dp[i]: res = dp[i]
+        return res
+
+
+
+
 
 # @lc code=end
